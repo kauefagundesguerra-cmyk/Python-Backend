@@ -1,4 +1,4 @@
-# Projeto Python Multilib
+# Projeto Python Open Easy
 
 ## Contents
 
