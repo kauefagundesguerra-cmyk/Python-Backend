@@ -5,6 +5,8 @@ from pathlib import Path
 import datetime as dt
 from unidecode import unidecode
 from math import ceil
+from openpyxl.styles import Font, PatternFill, Border, Side, Alignment
+
 data_hora = dt.datetime.now()
 print(f"\n Data Atual:{data_hora.strftime('%Y/%m/%d %H:%M')}\n")
 def subtracao(nums):
@@ -84,7 +86,13 @@ def calculadora(*numeros):
 calculadora(3,2.5,1)
 
 #Função que une o poder de Pandas , sem perder os estilos da Tabela Excel Original
-def style_saver(origin_file,edited_file,save_as,filetype="excel"):
+
+
+#importe ( from openpyxl.styles import Font, PatternFill, Border, Side, Alignment ) depois passe os argumentos no fim da função
+minha_fonte = Font(name="Arial", size=12, bold=True, color="FF0000") 
+meu_fundo = PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
+
+def style_saver(origin_file,edited_file,save_as,filetype="excel",**style_configs):
   '''
   Reaplica Estilos da Tabela Excel Não Editada Por Pandas Na tabela Modificada Por Pandas
   Soluciona A Desistilização automática ao salvar Com Pandas No formato .XLSX
@@ -97,11 +105,17 @@ def style_saver(origin_file,edited_file,save_as,filetype="excel"):
     Sem os Estilos Originais.
 
     save_as("str"): Nome que Será salvo o Arquivo com a estilização do Arquivo Não Editado --origin_file--
+    
+    style_configs ("str"): aceita os argumento font (estilo da fonte),fill (estilo do preenchimento)
+    border (estilo de contorno das Células),alignment (Posicionamento / Orientação do texto dentro da Célula)
+    number_format (formato Númerico das Células) 
   
   Return:
     Retorna o Arquivo Editado com Pandas --edited_file-- Porém com os Estilos de --origin_file-- Aplicados.
   '''
+     
   styles = {}
+        
   match filetype:
     case "excel":
       if ".xlsx" not in origin_file:
@@ -119,13 +133,17 @@ def style_saver(origin_file,edited_file,save_as,filetype="excel"):
           "alignment" : copy(cel.alignment),
           "number_format" : cel.number_format 
           }
+      for cel in styles.values():
+        for chave, valor in style_configs.items(): 
+          if chave in cel.keys():    
+              cel[chave] = copy(valor)         
       edited_file = pd.read_excel(edited_file)
       tmp_xlsx = Path("Não Interaja No Touch.xlsx")
       edited_file.to_excel(tmp_xlsx,index=False)
       wb_none = load_workbook(tmp_xlsx)
       ws_none= wb_none.active
       for line in ws_none:
-        for cel in line:      
+        for cel in line:
           if cel.coordinate in styles:
             cont_style = cel.coordinate
             style = styles[cel.coordinate]
@@ -140,7 +158,11 @@ def style_saver(origin_file,edited_file,save_as,filetype="excel"):
           cel.number_format = style["number_format"]   
       origin_file = Path(origin_file)
       if tmp_xlsx.exists():
-        tmp_xlsx.unlink()
+         tmp_xlsx.unlink()
       return wb_none.save(save_as)
-style_saver(origin_file,edited_file,save_as)
+style_saver("demo/original_with_style.xlsx","demo/edited_with_no_style.xlsx","teste",font=minha_fonte,fill=meu_fundo) 
+
+
+
+
     
