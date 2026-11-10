@@ -35,7 +35,7 @@ else:
 ### Usando a Função Calculadora (With Calculadora Function)
 
 ```python
-calculadora(1, 2, 3, 4, 5, 6, 7)  # Aceita uma quantidade variável de valores
+calculadora(1, 2, 3, 4, 5, 6, 7,operation="divisao")  # Aceita uma quantidade variável de valores,com Parâmetro do tipo de operação
 ```
 
 ### Preservando a Formatação de Arquivos Excel com Pandas e OpenPyXL
