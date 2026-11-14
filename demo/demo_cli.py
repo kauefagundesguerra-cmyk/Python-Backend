@@ -1,3 +1,6 @@
+
+### ARQUIVO DE DEMONSTRAÇÃO (DEMO) DO PROJETO PARA TESTES
+### THIS IS A DEMO VERSION FOR GENERAL TESTS
 import pandas as pd 
 from openpyxl import load_workbook
 from copy import copy
