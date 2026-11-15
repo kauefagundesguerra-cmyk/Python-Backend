@@ -189,3 +189,218 @@ Essa abordagem combina duas bibliotecas com funções diferentes:
 - **OpenPyXL:** preservação e personalização da estrutura visual da planilha.
 
 O resultado é uma solução flexível que permite manipular dados programaticamente sem abrir mão da apresentação visual original do Excel.
+
+# Guia de instalação
+
+Este guia apresenta as diferentes formas de instalar o **OpenEasy** utilizando o gerenciador de pacotes `pip`, com ou sem ambiente virtual (`venv`).
+
+As instruções contemplam Windows e distribuições Linux.
+
+## 1. Pré-requisitos
+
+Antes de iniciar a instalação, verifique se você possui:
+
+- Python 3.10 ou superior.
+- Pip (gerenciador de pacotes do Python).
+- Acesso ao terminal do sistema operacional.
+
+Para verificar as versões instaladas:
+
+**Windows:**
+
+```bash
+python --version
+python -m pip --version
+```
+
+**Linux:**
+
+```bash
+python3 --version
+python3 -m pip --version
+```
+
+## 2. Instalação utilizando ambiente virtual (recomendado)
+
+O ambiente virtual permite instalar dependências isoladamente, evitando conflitos entre projetos Python.
+
+### Windows
+
+**1. Criar o ambiente virtual:**
+
+```powershell
+python -m venv .venv
+```
+
+**2. Ativar o ambiente virtual:**
+
+```powershell
+.venv\Scripts\activate
+```
+
+**3. Instalar o pacote:**
+
+```bash
+pip install openeasy
+```
+
+**4. Desativar o ambiente virtual:**
+
+```bash
+deactivate
+```
+
+### Linux
+
+**1. Instalar o suporte ao venv (se necessário):**
+
+Ubuntu / Debian / Linux Mint:
+
+```bash
+sudo apt install python3-venv python3-full
+```
+
+Fedora:
+
+```bash
+sudo dnf install python3
+```
+
+Arch Linux:
+
+```bash
+sudo pacman -S python python-pip
+```
+
+**2. Criar o ambiente virtual:**
+
+```bash
+python3 -m venv .venv
+```
+
+**3. Ativar o ambiente virtual:**
+
+```bash
+source .venv/bin/activate
+```
+
+**4. Instalar o pacote:**
+
+```bash
+pip install openeasy
+```
+
+**5. Desativar o ambiente virtual:**
+
+```bash
+deactivate
+```
+
+## 3. Instalação normal (sem ambiente virtual)
+
+Também é possível instalar o pacote diretamente no ambiente Python disponível no sistema.
+
+> Atenção: essa modalidade pode gerar conflitos entre dependências de diferentes projetos. Em distribuições Linux modernas, a instalação global via pip pode ser bloqueada pelo gerenciamento de pacotes do sistema (PEP 668).
+
+### Windows
+
+Abra o PowerShell ou CMD e execute:
+
+```powershell
+python -m pip install openeasy
+```
+
+Para atualizar:
+
+```powershell
+python -m pip install --upgrade openeasy
+```
+
+### Linux
+
+Em distribuições que permitem a instalação global pelo pip:
+
+```bash
+python3 -m pip install openeasy
+```
+
+Para atualizar:
+
+```bash
+python3 -m pip install --upgrade openeasy
+```
+
+**Observação para Ubuntu, Debian e Linux Mint:**
+
+Caso apareça o erro `externally-managed-environment`, o sistema está protegendo o Python gerenciado pela distribuição.
+
+Nesse caso, utilize um ambiente virtual (`venv`) ou instale a versão disponibilizada pelo gerenciador de pacotes da distribuição, caso exista.
+
+Evite utilizar `--break-system-packages`, pois isso pode comprometer dependências do próprio sistema operacional.
+
+## 4. Instalação a partir do código-fonte
+
+Caso queira instalar o projeto diretamente de um repositório Git:
+
+```bash
+git clone URL_DO_REPOSITORIO
+```
+
+Entre na pasta do projeto:
+
+```bash
+cd NOME_DO_PROJETO
+```
+
+Instale utilizando pip:
+
+```bash
+pip install .
+```
+
+Para instalação editável, destinada ao desenvolvimento:
+
+```bash
+pip install -e .
+```
+
+## 5. Verificar a instalação
+
+Para verificar se o pacote foi instalado corretamente:
+
+```bash
+pip show openeasy
+```
+
+Também é possível verificar se o Python consegue localizar o pacote:
+
+```bash
+python -c "import openeasy; print('Instalação concluída!')"
+```
+
+No Linux, caso utilize `python3`:
+
+```bash
+python3 -c "import openeasy; print('Instalação concluída!')"
+```
+
+## 6. Desinstalação
+
+Para remover o pacote:
+
+```bash
+pip uninstall openeasy
+```
+
+Para confirmar, digite `y` quando solicitado.
+
+---
+
+## Considerações finais
+
+- Recomenda-se utilizar ambientes virtuais para projetos Python.
+- Não é necessário versionar a pasta `.venv` no Git.
+- Para compartilhar as dependências do projeto, utilize um arquivo `requirements.txt`.
+- Mantenha o Python e o pip atualizados sempre que possível.
+
+**OpenEasy — Simplificando operações com Python.**
