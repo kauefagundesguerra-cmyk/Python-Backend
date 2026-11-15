@@ -1,0 +1,23 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "openeasy"
+version = "1.0.0"
+description = "Biblioteca Python com calculadora e ferramentas para preservação de estilos em planilhas Excel."
+readme = "Docs/README.md"
+requires-python = ">=3.10"
+license = {file = "Docs/LICENSE"}
+
+authors = [
+    {name = "Kauê Fagundes Guerra"}
+]
+
+dependencies = [
+    "pandas",
+    "openpyxl"
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/openeasy"]
